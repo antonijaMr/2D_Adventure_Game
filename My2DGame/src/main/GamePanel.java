@@ -33,6 +33,9 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread; //like a clock? needs to implement Runnable
+	
+	public Collisionchecker cChecker = new Collisionchecker(this);
+	
 	public Player player = new Player(this,keyH);
 	
 	public GamePanel() {
