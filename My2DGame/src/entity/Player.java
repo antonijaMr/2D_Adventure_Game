@@ -122,20 +122,28 @@ public class Player extends Entity {
 		//if i == 999 -> we didnt touch any object
 		if(i != 999) {
 			String objectName = gp.obj[i].name;
+			
 			switch(objectName) {
 			case "Key":
 				hasKey++;
+				gp.playSE(1);
 				gp.obj[i] = null; //key disapears
 				System.out.println("key: " + hasKey);
 				break;
 			case "Door":
 				if(hasKey > 0) {
+					gp.playSE(3);
 					gp.obj[i] = null;
 					hasKey--;
 					System.out.println("key: " + hasKey);
 				}
 				break;
 			case "Chest":
+				break;
+			case "Boots":
+				gp.playSE(2);
+				speed += 1;
+				gp.obj[i] = null;
 				break;
 			}
 			

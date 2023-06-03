@@ -33,11 +33,13 @@ public class GamePanel extends JPanel implements Runnable {
 	TileManager tileM = new TileManager(this);
 	
 	KeyHandler keyH = new KeyHandler();
+	Sound sound = new Sound();
 	Thread gameThread; //like a clock? needs to implement Runnable
 	
 	public Collisionchecker cChecker = new Collisionchecker(this);
 	public AssetSetter aSetter = new AssetSetter(this);
 	
+	//entity and object
 	public Player player = new Player(this,keyH);
 	public SuperObject obj[] = new SuperObject[10];
 	
@@ -51,7 +53,8 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void setupGame() {
-		aSetter.setObject();
+		aSetter.setObject();	
+//		playMusic(0);
 	}
 
 	public void startGameThread() {
@@ -79,11 +82,8 @@ public class GamePanel extends JPanel implements Runnable {
 				nextDrawTime +=drawInterval;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
-			
-		}
-		
-		
+			}	
+		}	
 	}
 	
 	public void update() {
@@ -108,6 +108,21 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		g2.dispose(); //relese system resources
 		
+	}
+	
+	public void playMusic(int i) {
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+	}
+	
+	public void stopMusic() {
+		sound.stop();
+	}
+	
+	public void playSE(int i) {
+		sound.setFile(i);
+		sound.play();
 	}
 }
 
