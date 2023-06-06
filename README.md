@@ -9,4 +9,4 @@ Interaction between objects like collecting a key and opening a door to get to a
 I also added following sound effects. 
 Learing about java swing libray, threads, timers, jpanels etc.
 
-[link] (https://github.com/antonijaMr/2D_Adventure_Game/edit/main/README.md)
+[link](https://www.canva.com/design/DAFlENfDAHI/iC8ga4zrWxmT_ISKJLlV5A/view?utm_content=DAFlENfDAHI&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
