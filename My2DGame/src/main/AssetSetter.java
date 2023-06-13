@@ -1,5 +1,8 @@
 package main;
 
+
+//18:27 video #10
+
 import object.OBJ_Boots;
 import object.OBJ_Chest;
 import object.OBJ_door;
@@ -42,6 +45,10 @@ public class AssetSetter {
 		gp.obj[4] = new OBJ_Boots();
 		gp.obj[4].worldX = 7 * gp.tileSize;
 		gp.obj[4].worldY = 21 * gp.tileSize;
+		
+		gp.obj[5] = new OBJ_door();
+		gp.obj[5].worldX = 2 * gp.tileSize;
+		gp.obj[5].worldY = 20 * gp.tileSize;
 		
 		
 		
