@@ -13,7 +13,7 @@ import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
 	final int originalTileSize = 16; 	
-	final int scale = 3;
+	final int scale = 4;
 	
 	public final int tileSize = originalTileSize*scale; //48x48
 	public final int maxScreenCol = 16;
@@ -28,16 +28,19 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int wordHeight = tileSize*maxWorldRow;
 	
 	//FPS - Frames per second
-	int FPS = 30;
+	int FPS = 60;
 	
 	TileManager tileM = new TileManager(this);
 	
 	KeyHandler keyH = new KeyHandler();
+	Sound sound = new Sound();
 	Thread gameThread; //like a clock? needs to implement Runnable
 	
 	public Collisionchecker cChecker = new Collisionchecker(this);
 	public AssetSetter aSetter = new AssetSetter(this);
+	public UI ui = new UI(this);
 	
+	//entity and object
 	public Player player = new Player(this,keyH);
 	public SuperObject obj[] = new SuperObject[10];
 	
@@ -51,7 +54,8 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void setupGame() {
-		aSetter.setObject();
+		aSetter.setObject();	
+		playMusic(0);
 	}
 
 	public void startGameThread() {
@@ -79,11 +83,8 @@ public class GamePanel extends JPanel implements Runnable {
 				nextDrawTime +=drawInterval;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
-			
-		}
-		
-		
+			}	
+		}	
 	}
 	
 	public void update() {
@@ -93,7 +94,6 @@ public class GamePanel extends JPanel implements Runnable {
 	public void paintComponent(Graphics g) {//standard name for drawing
 		super.paintComponent(g); //super = Jpanel
 		Graphics2D g2 = (Graphics2D)g;
-		
 		
 		tileM.draw(g2);
 		
@@ -106,8 +106,25 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		player.draw(g2);
 		
+		ui.draw(g2);
+		
 		g2.dispose(); //relese system resources
 		
+	}
+	
+	public void playMusic(int i) {
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+	}
+	
+	public void stopMusic() {
+		sound.stop();
+	}
+	
+	public void playSE(int i) {
+		sound.setFile(i);
+		sound.play();
 	}
 }
 

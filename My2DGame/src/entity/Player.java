@@ -19,7 +19,7 @@ public class Player extends Entity {
 	public final int screenY;
 	
 	//indicates how many keys player has
-	int hasKey = 0;
+	public int hasKey = 0;
 
 	public Player(GamePanel gp, KeyHandler key) {
 		this.gp = gp;
@@ -122,25 +122,40 @@ public class Player extends Entity {
 		//if i == 999 -> we didnt touch any object
 		if(i != 999) {
 			String objectName = gp.obj[i].name;
+			
 			switch(objectName) {
 			case "Key":
 				hasKey++;
+				gp.playSE(1);
 				gp.obj[i] = null; //key disapears
-				System.out.println("key: " + hasKey);
+				gp.ui.showMessage("You got a key!!!");
 				break;
 			case "Door":
 				if(hasKey > 0) {
+					gp.playSE(3);
 					gp.obj[i] = null;
+					gp.ui.showMessage("You opened the door!!!");
 					hasKey--;
-					System.out.println("key: " + hasKey);
+				}else {
+					gp.ui.showMessage("You dont have a key!");
 				}
 				break;
 			case "Chest":
+				 //we want to stop the game when chest is found
+				gp.ui.gameFinished = true;
+				gp.stopMusic();
+				gp.playSE(4);
+				break;
+			case "Boots":
+				gp.ui.showMessage("Speed increased!");
+				gp.playSE(2);
+				speed += 1;
+				gp.obj[i] = null;
 				break;
 			}
 			
 		}
-	}
+	}	
 	
 	public void draw(Graphics2D g2) {
 		BufferedImage image = up1;
