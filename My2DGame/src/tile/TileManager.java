@@ -1,6 +1,7 @@
 package tile;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,192 +10,122 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.UtilityTool;
 
 public class TileManager {
-	
+
 	GamePanel gp;
 	public Tile[] tile;
-	
+
 	public int mapTileNum[][];
-	
-	
+
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
 		tile = new Tile[25];
-		mapTileNum = new int[ gp.maxWorldCol][gp.maxWorldRow];
+		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		getTileImage();
 //		loadMap("/maps/map01.txt");
 //		loadMap("/maps/worldMap2.txt");
 		loadMap("/maps/worldMap4.txt");
 
 	}
-	
+
 	public void loadMap(String filePath) {
 		try {
 			InputStream is = getClass().getResourceAsStream(filePath);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			
+
 			int col = 0;
 			int row = 0;
-			while(col < gp.maxWorldCol &&  row < gp.maxWorldRow) {
+			while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
 				String line = br.readLine();
-				while(col < gp.maxWorldCol) {
+				while (col < gp.maxWorldCol) {
 					String numbers[] = line.split(" ");
 					int num = Integer.parseInt(numbers[col]);
 					mapTileNum[col][row] = num;
 					col++;
 				}
-				if(col == gp.maxWorldCol) {
+				if (col == gp.maxWorldCol) {
 					col = 0;
 					row++;
 				}
 			}
 			br.close();
-		}catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 	}
-	
+
 	public void getTileImage() {
+		setup(0, "grass", false);
+		setup(1, "wall", true);
+		setup(2, "water", true);
+		setup(3, "earth", true);
+		setup(4, "tree", true);
+		setup(5, "sand", false);
+		setup(6, "apple", true);
+		setup(7, "brigde", false);
+		setup(8, "cherry", true);
+		setup(9, "christmass", true);
+		setup(10, "edge1", false);
+		setup(11, "edge2", false);
+		setup(12, "edge3", false);
+		setup(13, "edge4", false);
+		setup(14, "edgeCross", false);
+		setup(15, "fish", true);
+		setup(16, "floor", false);
+		setup(17, "flowers", false);
+		setup(18, "gold", true);
+		setup(19, "lights", true);
+		setup(20, "mosywall", true);
+		setup(21, "path_", false);
+		setup(22, "pathI", false);
+
+	}
+
+	public void setup(int index, String imagePath, boolean collision) {
+		UtilityTool uTool = new UtilityTool();
+
 		try {
-			tile[0] = new Tile();
-			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
-			
-			tile[1] = new Tile();
-			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
-			tile[1].collision = true;
-			
-			tile[2] = new Tile();
-			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
-			tile[2].collision = true;
-			
-			tile[3] = new Tile();
-			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));
-			
-			tile[4] = new Tile();
-			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
-			tile[4].collision = true;
-			
-			tile[5] = new Tile();
-			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png"));
-			
-			tile[6] = new Tile();
-			tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/apple.png"));
-			tile[6].collision = true;
-			
-			tile[7] = new Tile();
-			tile[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/brigde.png"));
-			
-			tile[8] = new Tile();
-			tile[8].image = ImageIO.read(getClass().getResourceAsStream("/tiles/cherry.png"));
-			tile[8].collision = true;
-			
-			tile[9] = new Tile();
-			tile[9].image = ImageIO.read(getClass().getResourceAsStream("/tiles/christmass.png"));
-			tile[9].collision = true;
-			
-			tile[10] = new Tile();
-			tile[10].image = ImageIO.read(getClass().getResourceAsStream("/tiles/edge1.png"));
-			
-			tile[11] = new Tile();
-			tile[11].image = ImageIO.read(getClass().getResourceAsStream("/tiles/edge2.png"));
-			
-			tile[12] = new Tile();
-			tile[12].image = ImageIO.read(getClass().getResourceAsStream("/tiles/edge3.png"));
-			
-			tile[13] = new Tile();
-			tile[13].image = ImageIO.read(getClass().getResourceAsStream("/tiles/edge4.png"));
-			
-			tile[14] = new Tile();
-			tile[14].image = ImageIO.read(getClass().getResourceAsStream("/tiles/edgeCross.png"));
-			
-			tile[15] = new Tile();
-			tile[15].image = ImageIO.read(getClass().getResourceAsStream("/tiles/fish.png"));
-			tile[15].collision = true;
-			
-			tile[16] = new Tile();
-			tile[16].image = ImageIO.read(getClass().getResourceAsStream("/tiles/floor.png"));
-			
-			tile[17] = new Tile();
-			tile[17].image = ImageIO.read(getClass().getResourceAsStream("/tiles/flowers.png"));
-			
-			tile[18] = new Tile();
-			tile[18].image = ImageIO.read(getClass().getResourceAsStream("/tiles/gold.png"));
-			tile[18].collision = true;
-			
-			tile[19] = new Tile();
-			tile[19].image = ImageIO.read(getClass().getResourceAsStream("/tiles/lights.png"));
-			tile[19].collision = true;
-			
-			tile[20] = new Tile();
-			tile[20].image = ImageIO.read(getClass().getResourceAsStream("/tiles/mosywall.png"));
-			tile[20].collision = true;
-			
-			tile[21] = new Tile();
-			tile[21].image = ImageIO.read(getClass().getResourceAsStream("/tiles/path_.png"));
-			
-			tile[22] = new Tile();
-			tile[22].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathI.png"));
-			
-			
-		}catch(IOException e) {
+			tile[index] = new Tile();
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imagePath + ".png"));
+			tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+			tile[index].collision = collision;
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void draw(Graphics2D g2) {
 		int worldCol = 0;
 		int worldRow = 0;
-		
-		while(worldCol<gp.maxWorldCol && worldRow < gp.maxWorldRow) {
-			
+
+		while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
+
 			int tileNum = mapTileNum[worldCol][worldRow];
-			
+
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
-			int screenX = worldX -gp.player.worldX + gp.player.screenX;
-			int screenY = worldY -gp.player.worldY + gp.player.screenY;
-			
-			if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-			   worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-			   worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-			   worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-				
-				g2.drawImage(tile[tileNum].image,screenX,screenY,gp.tileSize, gp.tileSize, null);
+			int screenX = worldX - gp.player.worldX + gp.player.screenX;
+			int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+			if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
+					&& worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
+					&& worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
+					&& worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+
+				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 			}
-	
+
 			worldCol++;
-			
-			if(worldCol == gp.maxWorldCol) {
+
+			if (worldCol == gp.maxWorldCol) {
 				worldCol = 0;
 				worldRow++;
 			}
-			
+
 		}
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

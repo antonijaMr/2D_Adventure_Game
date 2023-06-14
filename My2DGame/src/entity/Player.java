@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 public class Player extends Entity {
 	GamePanel gp;
@@ -51,19 +52,26 @@ public class Player extends Entity {
 	}
 
 	public void getPlayerImage() {
+		up1 = setup("girl_up_1");
+		up2 = setup("girl_up_2");
+		down1 = setup("girl_down_1");
+		down2 = setup("girl_down_2");
+		right1 = setup("girl_right_1");
+		right2 = setup("girl_right_2");
+	    left1 = setup("girl_left_1");
+		left2 = setup("girl_left_2");
+	}
+	
+	public BufferedImage setup(String imgName) {
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage scaledImage = null;
 		try {
-			up1 = ImageIO.read(getClass().getResourceAsStream("/player/girl_up_1.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("/player/girl_up_2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/girl_down_1.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/girl_down_2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/girl_right_1.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/player/girl_right_2.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("/player/girl_left_1.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("/player/girl_left_2.png"));
-
-		} catch (IOException e) {
+			scaledImage = ImageIO.read(getClass().getResourceAsStream("/player/"+imgName+".png"));			
+			scaledImage = uTool.scaleImage(scaledImage, gp.tileSize, gp.tileSize);
+		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		return scaledImage;
 	}
 
 	public void update() {
@@ -194,7 +202,7 @@ public class Player extends Entity {
 			}
 			break;
 		}
-		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null); // null is image observer
+		g2.drawImage(image, screenX, screenY, null); // null is image observer
 
 	}
 }
