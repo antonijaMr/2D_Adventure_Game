@@ -21,12 +21,12 @@ public class TileManager {
 
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
-		tile = new Tile[25];
+		tile = new Tile[50];
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		getTileImage();
 //		loadMap("/maps/map01.txt");
 //		loadMap("/maps/worldMap2.txt");
-		loadMap("/maps/worldMap4.txt");
+		loadMap("/maps/world_Map.txt");
 
 	}
 
@@ -57,29 +57,54 @@ public class TileManager {
 	}
 
 	public void getTileImage() {
-		setup(0, "grass", false);
-		setup(1, "wall", true);
-		setup(2, "water", true);
-		setup(3, "earth", true);
-		setup(4, "tree", true);
-		setup(5, "sand", false);
-		setup(6, "apple", true);
-		setup(7, "brigde", false);
-		setup(8, "cherry", true);
-		setup(9, "christmass", true);
-		setup(10, "edge1", false);
-		setup(11, "edge2", false);
-		setup(12, "edge3", false);
-		setup(13, "edge4", false);
-		setup(14, "edgeCross", false);
-		setup(15, "fish", true);
-		setup(16, "floor", false);
-		setup(17, "flowers", false);
-		setup(18, "gold", true);
-		setup(19, "lights", true);
-		setup(20, "mosywall", true);
-		setup(21, "path_", false);
-		setup(22, "pathI", false);
+		setup(0, "000", false);
+		setup(1, "001", false);
+		setup(2, "002", false);
+		setup(3, "003", false);
+		setup(4, "004", false);
+		setup(5, "005", false);
+		setup(6, "006", false);
+		setup(7, "007", false);
+		setup(8, "008", false);
+		setup(9, "009", false);
+		setup(10, "010", false);
+		setup(11, "011", false);
+		setup(12, "012", false);
+		setup(13, "013", false);
+		setup(14, "014", false);
+		setup(15, "015", false);
+		setup(16, "016", true);
+		setup(17, "017", false);
+		setup(18, "018", true);
+		setup(19, "019", true);
+		setup(20, "020", true);
+		setup(21, "021", true);
+		setup(22, "022", true);
+		setup(23, "023", true);
+		setup(24, "024", true);
+		setup(25, "025", true);
+		setup(26, "026", true);
+		setup(27, "027", true);
+		setup(28, "028", true);
+		setup(29, "029", true);
+		setup(30, "030", true);
+		setup(31, "031", true);
+		setup(32, "032", true);
+		setup(33, "033", true);
+		setup(34, "034", false);
+		setup(35, "035", true);
+		setup(36, "036", false);
+		setup(37, "037", false);
+		setup(38, "038", true);
+		setup(39, "039", false);
+		setup(40, "040", true);
+		setup(41, "041", true);
+		setup(42, "042", false);
+		setup(43, "043", true);
+		setup(44, "044", true);
+		setup(45, "045", true);
+		setup(46, "046", true);
+
 
 	}
 

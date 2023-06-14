@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	//entity and object
 	public Player player = new Player(this,keyH);
-	public SuperObject obj[] = new SuperObject[10];
+	public SuperObject obj[] = new SuperObject[12];
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth,screenHeigth));
@@ -55,7 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void setupGame() {
 		aSetter.setObject();	
-		playMusic(0);
+//		playMusic(0);
 	}
 
 	public void startGameThread() {
@@ -95,10 +95,6 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(g); //super = Jpanel
 		Graphics2D g2 = (Graphics2D)g;
 		
-		//debug
-		long drawStart = 0;
-		drawStart = System.nanoTime();
-		
 		tileM.draw(g2);
 		
 		//looking for object we want to draw
@@ -113,10 +109,7 @@ public class GamePanel extends JPanel implements Runnable {
 		ui.draw(g2);
 		
 		long drawEnd = System.nanoTime();
-		long passed = drawEnd-drawStart;
 		g2.setColor(Color.white);
-		g2.drawString("draw time: " + passed, 10, 400);
-		System.out.println("drawTime: " + passed);
 		 
 		g2.dispose(); //relese system resources
 		
