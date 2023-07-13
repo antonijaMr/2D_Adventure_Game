@@ -18,6 +18,74 @@ public class KeyHandler implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode(); // returns the integer keyCode asociated with the key
 
+		// TITLE STATE
+		if (gp.gameState == gp.titleState) {
+			if (gp.ui.titleScreenState == 0) {
+				if (code == KeyEvent.VK_W) {
+					gp.ui.commandNum--;
+					if (gp.ui.commandNum < 0) {
+						gp.ui.commandNum = 2;
+					}
+
+				}
+				if (code == KeyEvent.VK_S) {
+					gp.ui.commandNum++;
+					if (gp.ui.commandNum > 2) {
+						gp.ui.commandNum = 0;
+					}
+				}
+
+				if (code == KeyEvent.VK_ENTER) {
+					if (gp.ui.commandNum == 0) {
+						gp.ui.titleScreenState = 1;
+//					gp.playMusic(0);
+					}
+					if (gp.ui.commandNum == 1) {
+						// add later
+					}
+					if (gp.ui.commandNum == 2) {
+						System.exit(0);
+					}
+				}
+			}
+			
+			else if (gp.ui.titleScreenState == 1) {
+				if (code == KeyEvent.VK_W) {
+					gp.ui.commandNum--;
+					if (gp.ui.commandNum < 0) {
+						gp.ui.commandNum = 3;
+					}
+
+				}
+				if (code == KeyEvent.VK_S) {
+					gp.ui.commandNum++;
+					if (gp.ui.commandNum > 3) {
+						gp.ui.commandNum = 0;
+					}
+				}
+
+				if (code == KeyEvent.VK_ENTER) {
+					if (gp.ui.commandNum == 0) {
+						System.out.println("Do some fighter stuff");
+						gp.gameState = gp.playState;
+					}
+					if (gp.ui.commandNum == 1) {
+						System.out.println("Do some thief stuff");
+						gp.gameState = gp.playState;
+					}
+					if (gp.ui.commandNum == 2) {
+						System.out.println("Do some sorcer stuff");
+						gp.gameState = gp.playState;
+					}
+					if (gp.ui.commandNum == 3) {
+						gp.ui.titleScreenState = 0;
+						
+						
+					}
+				}
+			}
+		}
+
 		if (gp.gameState == gp.playState) {
 			// PLAY STATE
 			if (code == KeyEvent.VK_W) {
@@ -35,7 +103,7 @@ public class KeyHandler implements KeyListener {
 			if (code == KeyEvent.VK_P) {
 				gp.gameState = gp.pauseState;
 			}
-			if(code == KeyEvent.VK_ENTER) {
+			if (code == KeyEvent.VK_ENTER) {
 				enterPressed = true;
 			}
 		}
@@ -48,7 +116,7 @@ public class KeyHandler implements KeyListener {
 
 		// Dialogue state
 		else if (gp.gameState == gp.dialogState) {
-			if(code == KeyEvent.VK_ENTER) {
+			if (code == KeyEvent.VK_ENTER) {
 				gp.gameState = gp.playState;
 			}
 		}

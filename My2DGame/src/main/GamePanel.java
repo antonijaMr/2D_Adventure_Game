@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	//game state
 	public int gameState;
+	public final int titleState = 0;
 	public final int playState = 1;
 	public final int pauseState = 2;
 	public final int dialogState = 3;
@@ -64,7 +65,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public void setupGame() {
 		aSetter.setObject();	
 		aSetter.setNPC();
-		gameState = playState;
+		gameState = titleState;
 //		playMusic(0);
 	}
 
@@ -111,33 +112,42 @@ public class GamePanel extends JPanel implements Runnable {
 		
 	}
 	
-	public void paintComponent(Graphics g) {//standard name for drawing
-		super.paintComponent(g); //super = Jpanel
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		
-		tileM.draw(g2);
-		
-		//looking for object we want to draw
-		for(int i = 0; i<obj.length; i++) {
-			if(obj[i] != null) {
-				obj[i].draw(g2, this);
-			}
-		}
-		//drawing npc
-		for(int i = 0; i<npc.length; i++) {
-			if(npc[i] != null) {
-				npc[i].draw(g2);
-			}
+		//TITLE screen
+		if(gameState == titleState) {
+			ui.draw(g2);
+			
 		}
 		
-		player.draw(g2);
-		
-		ui.draw(g2);
-		
-		long drawEnd = System.nanoTime();
-		g2.setColor(Color.white);
+		//OTHERS
+		else {
+			tileM.draw(g2);
+
+			// looking for object we want to draw
+			for (int i = 0; i < obj.length; i++) {
+				if (obj[i] != null) {
+					obj[i].draw(g2, this);
+				}
+			}
+			// drawing npc
+			for (int i = 0; i < npc.length; i++) {
+				if (npc[i] != null) {
+					npc[i].draw(g2);
+				}
+			}
+
+			player.draw(g2);
+
+			ui.draw(g2);
+
+			long drawEnd = System.nanoTime();
+			g2.setColor(Color.white);
+		}
 		 
-		g2.dispose(); //relese system resources
+		g2.dispose();
 		
 	}
 	
