@@ -1,6 +1,0 @@
--Dfile.encoding=UTF-8
--p
-/home/antonija/Desktop/2D_Adventure_Game/My2DGame/bin
--XX:+ShowCodeDetailsInExceptionMessages
--m
-My2DGame/main.Main

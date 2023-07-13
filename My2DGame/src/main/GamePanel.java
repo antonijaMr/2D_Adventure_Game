@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -32,7 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	TileManager tileM = new TileManager(this);
 	
-	KeyHandler keyH = new KeyHandler();
+	public KeyHandler keyH = new KeyHandler(this);
 	Sound sound = new Sound();
 	Thread gameThread; //like a clock? needs to implement Runnable
 	
@@ -43,6 +44,13 @@ public class GamePanel extends JPanel implements Runnable {
 	//entity and object
 	public Player player = new Player(this,keyH);
 	public SuperObject obj[] = new SuperObject[12];
+	public Entity npc[] = new Entity[10];
+	
+	//game state
+	public int gameState;
+	public final int playState = 1;
+	public final int pauseState = 2;
+	public final int dialogState = 3;
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth,screenHeigth));
@@ -55,6 +63,8 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void setupGame() {
 		aSetter.setObject();	
+		aSetter.setNPC();
+		gameState = playState;
 //		playMusic(0);
 	}
 
@@ -88,7 +98,17 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void update() {
-		player.update();
+		if(gameState == playState) {
+			player.update();
+			for(int i =0; i<npc.length; i++) {
+				if(npc[i] != null) {
+					npc[i].update();
+				}
+			}
+		}else if(gameState == pauseState) {
+			//pause
+		}
+		
 	}
 	
 	public void paintComponent(Graphics g) {//standard name for drawing
@@ -101,6 +121,12 @@ public class GamePanel extends JPanel implements Runnable {
 		for(int i = 0; i<obj.length; i++) {
 			if(obj[i] != null) {
 				obj[i].draw(g2, this);
+			}
+		}
+		//drawing npc
+		for(int i = 0; i<npc.length; i++) {
+			if(npc[i] != null) {
+				npc[i].draw(g2);
 			}
 		}
 		
