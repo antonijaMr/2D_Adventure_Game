@@ -58,6 +58,10 @@ public class UI {
 		g2.setFont(pikselFont);
 		g2.setColor(Color.white);
 
+		if (gp.gameState == gp.pauseState) {
+			drawPauseScreen();
+			drawPlayerLife();
+		}
 		// titlestate
 		if (gp.gameState == gp.titleState) {
 			drawTitleScreen();
@@ -66,11 +70,6 @@ public class UI {
 		if (gp.gameState == gp.playState) {
 			// do playstate
 			drawPlayerLife();
-		}
-
-		if (gp.gameState == gp.pauseState) {
-			drawPlayerLife();
-			drawPauseScreen();
 		}
 
 		if (gp.gameState == gp.dialogState) {
