@@ -30,6 +30,11 @@ public class EventHandler {
 			healingPool(gp.dialogState);
 		}
 		
+		if(hit(22,27,"any") == true) {
+			System.out.println("teleport");
+			teleport(gp.dialogState);
+		}
+		
 	}
 	
 	public boolean hit(int eventCol, int eventRow, String reqDirection) {
@@ -66,6 +71,13 @@ public class EventHandler {
 			gp.ui.currentDialogue = "Your life have been recovered";
 			gp.player.life = gp.player.maxLife;
 		}
+	}
+	
+	public void teleport(int gameState) {
+		gp.gameState = gameState;
+		gp.ui.currentDialogue = "Teleport";
+		gp.player.worldX = gp.tileSize*2;
+		gp.player.worldY = gp.tileSize*29;
 	}
 }
 
